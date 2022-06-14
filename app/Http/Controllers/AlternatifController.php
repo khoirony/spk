@@ -229,7 +229,20 @@ class AlternatifController extends Controller
                 'nilai' => sqrt($hasil)
             ]);
         }
+
         //Mengisi Tabel Preferensi
+        Preferensi::truncate();
+        $dnegatif = Dnegatif::all();
+        $n=1;
+        foreach ($dnegatif as $dn){
+            $dp = Dpositif::find($n);
+            $nilai = $dn['nilai']/($dn['nilai']+$dp->nilai);
+            Preferensi::insert([
+                'name' => $dn['name'],
+                'nilai' => $nilai
+            ]);
+            $n++;
+        }
 
         return redirect('/alternatif')->with('success', 'Data Sukses Ditambahkan');
     }

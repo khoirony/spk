@@ -15,14 +15,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="col">A1</th>
-            <th scope="col">4</th>
-        </tr>
-        <tr>
-            <th scope="col">A2</th>
-            <th scope="col">3</th>
-        </tr>
+        @foreach ($preferensi as $p)
+            <tr>
+              <th scope="row">{{ $p->name }}</th>
+              <td>
+                {{ $p->nilai }}
+              </td>
+            </tr>
+            @endforeach
     </tbody>
 </table>
 </div>
