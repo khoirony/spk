@@ -8,6 +8,9 @@ use App\Models\Pembagi;
 use App\Models\Normalisasi;
 use App\Models\Terbobot;
 use App\Models\Positifnegatif;
+use App\Models\Dpositif;
+use App\Models\Dnegatif;
+use App\Models\Preferensi;
 
 class AlternatifController extends Controller
 {
@@ -184,6 +187,49 @@ class AlternatifController extends Controller
             'daya_listrik' => Terbobot::max('daya_listrik'),
             'status_bantuan' => Terbobot::max('status_bantuan')
         ]);
+
+        //Mengisi Tabel D Positif
+        Dpositif::truncate();
+        $positif = Positifnegatif::find(1);
+
+        foreach ($terbobot as $t){
+            $status_bangunan = pow($positif->status_bangunan-$t['status_bangunan'], 2);
+            $status_lahan = pow($positif->status_lahan-$t['status_lahan'], 2);
+            $luas_lantai = pow($positif->luas_lantai-$t['luas_lantai'], 2);
+            $jenis_lantai = pow($positif->jenis_lantai-$t['jenis_lantai'], 2);
+            $jenis_dinding = pow($positif->jenis_dinding-$t['jenis_dinding'], 2);
+            $fas_bab = pow($positif->fas_bab-$t['fas_bab'], 2);
+            $daya_listrik = pow($positif->daya_listrik-$t['daya_listrik'], 2);
+            $status_bantuan = pow($positif->status_bantuan-$t['status_bantuan'], 2);
+            $hasil = $status_bangunan+$status_lahan+$luas_lantai+$jenis_lantai+$jenis_dinding+$fas_bab+$daya_listrik+$status_bantuan;
+
+            Dpositif::insert([
+                'name' => $t['name'],
+                'nilai' => sqrt($hasil)
+            ]);
+        }
+
+        //Mengisi Tabel D Negatif
+        Dnegatif::truncate();
+        $negatif = Positifnegatif::find(2);
+
+        foreach ($terbobot as $t){
+            $status_bangunan = pow($t['status_bangunan']-$negatif->status_bangunan, 2);
+            $status_lahan = pow($t['status_lahan']-$negatif->status_lahan, 2);
+            $luas_lantai = pow($t['luas_lantai']-$negatif->luas_lantai, 2);
+            $jenis_lantai = pow($t['jenis_lantai']-$negatif->jenis_lantai, 2);
+            $jenis_dinding = pow($t['jenis_dinding']-$negatif->jenis_dinding, 2);
+            $fas_bab = pow($t['fas_bab']-$negatif->fas_bab, 2);
+            $daya_listrik = pow($t['daya_listrik']-$negatif->daya_listrik, 2);
+            $status_bantuan = pow($t['status_bantuan']-$negatif->status_bantuan, 2);
+            $hasil = $status_bangunan+$status_lahan+$luas_lantai+$jenis_lantai+$jenis_dinding+$fas_bab+$daya_listrik+$status_bantuan;
+
+            Dnegatif::insert([
+                'name' => $t['name'],
+                'nilai' => sqrt($hasil)
+            ]);
+        }
+        //Mengisi Tabel Preferensi
 
         return redirect('/alternatif')->with('success', 'Data Sukses Ditambahkan');
     }

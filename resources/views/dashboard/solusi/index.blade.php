@@ -65,14 +65,14 @@
               </tr>
           </thead>
           <tbody>
-              <tr>
-                  <th scope="col">A1</th>
-                  <th scope="col">4</th>
-              </tr>
-              <tr>
-                  <th scope="col">A2</th>
-                  <th scope="col">3</th>
-              </tr>
+            @foreach ($dpositif as $dp)
+            <tr>
+              <th scope="row">{{ $dp->name }}</th>
+              <td>
+                {{ $dp->nilai }}
+              </td>
+            </tr>
+            @endforeach
           </tbody>
       </table>
       </div>
@@ -86,14 +86,14 @@
               </tr>
           </thead>
           <tbody>
-              <tr>
-                  <th scope="col">A1</th>
-                  <th scope="col">4</th>
-              </tr>
-              <tr>
-                  <th scope="col">A2</th>
-                  <th scope="col">3</th>
-              </tr>
+            @foreach ($dnegatif as $dn)
+            <tr>
+              <th scope="row">{{ $dn->name }}</th>
+              <td>
+                {{ $dn->nilai }}
+              </td>
+            </tr>
+            @endforeach
           </tbody>
       </table>
       </div>
