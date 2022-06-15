@@ -16,8 +16,7 @@ class CreatePreferensisTable extends Migration
         Schema::create('preferensis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->double('nilai', 15, 8);
-            $table->timestamps();
+            $table->double('nilai', 15, 8)->nullable();
         });
     }
 

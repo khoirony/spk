@@ -17,7 +17,6 @@ class CreateDpositifsTable extends Migration
             $table->id();
             $table->string('name');
             $table->double('nilai', 15, 8);
-            $table->timestamps();
         });
     }
 

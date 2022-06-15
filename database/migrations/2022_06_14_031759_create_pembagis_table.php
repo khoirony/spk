@@ -23,7 +23,6 @@ class CreatePembagisTable extends Migration
             $table->double('fas_bab', 15, 8);
             $table->double('daya_listrik', 15, 8);
             $table->double('status_bantuan', 15, 8);
-            $table->timestamps();
         });
     }
 

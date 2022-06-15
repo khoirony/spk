@@ -14,11 +14,6 @@ use App\Models\Preferensi;
 
 class AlternatifController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $alternatif   = Alternatif::all();
@@ -36,12 +31,6 @@ class AlternatifController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -50,6 +39,46 @@ class AlternatifController extends Controller
 
         Alternatif::create($request->all());
 
+        $this->_hitung();
+        return redirect('/alternatif')->with('success', 'Data Sukses Ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $alternatif = Alternatif::find($id);
+        return view('dashboard.alternatif.edit',[
+            'title' => 'Alternatif',
+            'active' => 'alternatif'
+        ], compact('alternatif'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $alternatif = Alternatif::find($id);
+        $alternatif->name = $request->input('name');
+        $alternatif->status_bangunan = $request->input('status_bangunan');
+        $alternatif->status_lahan = $request->input('status_lahan');
+        $alternatif->luas_lantai = $request->input('luas_lantai');
+        $alternatif->jenis_lantai = $request->input('jenis_lantai');
+        $alternatif->jenis_dinding = $request->input('jenis_dinding');
+        $alternatif->fas_bab = $request->input('fas_bab');
+        $alternatif->daya_listrik = $request->input('daya_listrik');
+        $alternatif->status_bantuan = $request->input('status_bantuan');
+        $alternatif->update();
+
+        $this->_hitung();
+        return redirect('/alternatif')->with('success', 'Data Sukses Diedit');
+    }
+
+    public function destroy($id)
+    {
+        $alternatif = Alternatif::where('id', $id)->delete();
+        $this->_hitung();
+        return redirect('/alternatif')->with('success', 'Data Sukses Dihapus');
+    }
+
+    private function _hitung()
+	{
         // Mengisi Tabel Pembagi
         Pembagi::truncate();
         $alternatif = Alternatif::all();
@@ -233,78 +262,23 @@ class AlternatifController extends Controller
         //Mengisi Tabel Preferensi
         Preferensi::truncate();
         $dnegatif = Dnegatif::all();
+
         $n=1;
         foreach ($dnegatif as $dn){
-            $dp = Dpositif::find($n);
-            $nilai = $dn['nilai']/($dn['nilai']+$dp->nilai);
-            Preferensi::insert([
-                'name' => $dn['name'],
-                'nilai' => $nilai
-            ]);
-            $n++;
+            if($dn['nilai'] != 0){
+                $dp = Dpositif::find($n);
+                $nilai = $dn['nilai']/($dn['nilai']+$dp->nilai);
+                Preferensi::insert([
+                    'name' => $dn['name'],
+                    'nilai' => $nilai
+                ]);
+                $n++;
+            }else{
+                Preferensi::insert([
+                    'name' => $dn['name'],
+                    'nilai' => 0
+                ]);
+            }
         }
-
-        return redirect('/alternatif')->with('success', 'Data Sukses Ditambahkan');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $alternatif = Alternatif::find($id);
-        return view('dashboard.alternatif.edit',[
-            'title' => 'Alternatif',
-            'active' => 'alternatif'
-        ], compact('alternatif'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $alternatif = Alternatif::find($id);
-        $alternatif->name = $request->input('name');
-        $alternatif->status_bangunan = $request->input('status_bangunan');
-        $alternatif->status_lahan = $request->input('status_lahan');
-        $alternatif->luas_lantai = $request->input('luas_lantai');
-        $alternatif->jenis_lantai = $request->input('jenis_lantai');
-        $alternatif->jenis_dinding = $request->input('jenis_dinding');
-        $alternatif->fas_bab = $request->input('fas_bab');
-        $alternatif->daya_listrik = $request->input('daya_listrik');
-        $alternatif->status_bantuan = $request->input('status_bantuan');
-        $alternatif->update();
-        return redirect('/alternatif')->with('success', 'Data Sukses Diedit');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $alternatif = Alternatif::where('id', $id)->delete();
-        return redirect('/alternatif')->with('success', 'Data Sukses Dihapus');
     }
 }
