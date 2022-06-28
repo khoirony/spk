@@ -74,7 +74,8 @@
             </tr>
             @endforeach
           </tbody>
-      </table>
+        </table>
+        {{ $dpositif->links() }}
       </div>
       <div class="col">
         <h3>D-</h3>
@@ -95,7 +96,8 @@
             </tr>
             @endforeach
           </tbody>
-      </table>
+        </table>
+        {{ $dnegatif->links() }}
       </div>
     </div>
 

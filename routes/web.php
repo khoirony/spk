@@ -39,6 +39,8 @@ Route::get('/alternatif', [AlternatifController::class, 'index'])->middleware('a
 Route::get('/tambah', [AlternatifController::class, 'create'])->middleware('auth');
 Route::post('/store', [AlternatifController::class, 'store'])->middleware('auth');
 
+Route::get('/search', [AlternatifController::class, 'search'])->name('search')->middleware('auth');
+
 Route::get('/edit/{id}', [AlternatifController::class, 'edit'])->middleware('auth');
 Route::put('/update/{id}', [AlternatifController::class, 'update'])->middleware('auth');
 Route::get('/hapus/{id}', [AlternatifController::class, 'destroy'])->middleware('auth');

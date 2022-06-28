@@ -54,5 +54,5 @@
         </tbody>
       </table>
 </div>
-    
+{{ $normalisasi->links() }}
 @endsection

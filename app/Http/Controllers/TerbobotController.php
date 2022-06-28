@@ -10,7 +10,7 @@ class TerbobotController extends Controller
 {
     public function index()
     {
-        $terbobot   = Terbobot::all();
+        $terbobot   = Terbobot::paginate(10);
         return view('dashboard.terbobot.index', [
             'title' => 'Normalisasi Terbobot',
             'active' => 'terbobot'

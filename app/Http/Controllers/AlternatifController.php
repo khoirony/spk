@@ -16,11 +16,23 @@ class AlternatifController extends Controller
 {
     public function index()
     {
-        $alternatif   = Alternatif::all();
+        $alternatif   = Alternatif::paginate(10);
         return view('dashboard.alternatif.index', [
-            'title' => 'Alternatif',
-            'active' => 'alternatif'
-        ])->with('alternatif', $alternatif);
+            'title' => 'Manage Alternatif',
+            'active' => 'alternatif',
+            'alternatif' => $alternatif
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
+        $alternatif = Alternatif::where('name', 'like', "%" . $keyword . "%")->paginate(5);
+        return view('dashboard.alternatif.index', [
+            'title' => $keyword,
+            'active' => 'alternatif',
+            'alternatif' => $alternatif
+        ])->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function create()
@@ -47,7 +59,7 @@ class AlternatifController extends Controller
     {
         $alternatif = Alternatif::find($id);
         return view('dashboard.alternatif.edit',[
-            'title' => 'Alternatif',
+            'title' => 'Edit Data',
             'active' => 'alternatif'
         ], compact('alternatif'));
     }
@@ -181,7 +193,7 @@ class AlternatifController extends Controller
                 'name' => $n['name'],
                 'status_bangunan' => $n['status_bangunan']*5,
                 'status_lahan' => $n['status_lahan']*5,
-                'luas_lantai' => $n['luas_lantai']*3,
+                'luas_lantai' => $n['luas_lantai']*4,
                 'jenis_lantai' => $n['jenis_lantai']*4,
                 'jenis_dinding' => $n['jenis_dinding']*4,
                 'fas_bab' => $n['fas_bab']*3,
@@ -203,7 +215,7 @@ class AlternatifController extends Controller
             'jenis_dinding' => Terbobot::max('jenis_dinding'),
             'fas_bab' => Terbobot::max('fas_bab'),
             'daya_listrik' => Terbobot::min('daya_listrik'),
-            'status_bantuan' => Terbobot::min('status_bantuan')
+            'status_bantuan' => Terbobot::max('status_bantuan')
         ]);
         Positifnegatif::insert([
             'name' => 'Negatif',
@@ -214,7 +226,7 @@ class AlternatifController extends Controller
             'jenis_dinding' => Terbobot::min('jenis_dinding'),
             'fas_bab' => Terbobot::min('fas_bab'),
             'daya_listrik' => Terbobot::max('daya_listrik'),
-            'status_bantuan' => Terbobot::max('status_bantuan')
+            'status_bantuan' => Terbobot::min('status_bantuan')
         ]);
 
         //Mengisi Tabel D Positif

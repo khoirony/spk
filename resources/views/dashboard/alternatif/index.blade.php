@@ -19,7 +19,7 @@
             <th scope="col">Fasilitas BAB</th>
             <th scope="col">Daya Listrik</th>
             <th scope="col">Status Bantuan</th>
-            <th scope="col" style="text-align: center">Aksi</th>
+            <th scope="col" style="text-align: center;width:90px;">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -70,13 +70,17 @@
                 @case(4)
                   Ubin/Tegel @break
                 @case(5)
-                  Kayu/Papan (bagus) @break
+                  Kayu Berkualitas Tinggi @break
                 @case(6)
                   Semen/Bata @break
                 @case(7)
                   Bambu @break
                 @case(8)
-                  Kayu/Papan (jelek) @break
+                  Kayu Berkualitas Rendah @break
+                @case(9)
+                  Tanah @break
+                @case(10)
+                  Lainnya @break
                 @default
                   -kosong-
               @endswitch
@@ -93,6 +97,10 @@
                   Anyaman Bambu @break
                 @case(5)
                   Batang Kayu @break
+                @case(6)
+                  Bambu @break
+                @case(7)
+                  Lainnya @break
                 @default
                   -kosong-
               @endswitch
@@ -123,7 +131,7 @@
                   2200 Watt @break
                 @case(5)
                   >2200 Watt @break
-                @case(5)
+                @case(6)
                   Tanpa Meteran @break
                 @default
                   -kosong-
@@ -147,5 +155,5 @@
         </tbody>
       </table>
 </div>
-    
+{{ $alternatif->links() }}
 @endsection

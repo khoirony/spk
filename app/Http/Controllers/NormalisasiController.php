@@ -10,7 +10,7 @@ class NormalisasiController extends Controller
 {
     public function index()
     {
-        $normalisasi   = Normalisasi::all();
+        $normalisasi   = Normalisasi::paginate(10);
         return view('dashboard.normalisasi.index', [
             'title' => 'Normalisasi',
             'active' => 'normalisasi'

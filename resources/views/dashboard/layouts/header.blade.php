@@ -5,7 +5,9 @@
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <form class="w-100" method="get" action="/search">
+    <input class="form-control form-control-dark w-100" type="text" name="search" placeholder="Search" aria-label="Search" onchange="this.form.submit();">
+    </form>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
             <form action="/logout" method="POST">

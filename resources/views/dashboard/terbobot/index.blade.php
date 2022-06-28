@@ -54,5 +54,5 @@
         </tbody>
       </table>
 </div>
-    
+{{ $terbobot->links() }}
 @endsection

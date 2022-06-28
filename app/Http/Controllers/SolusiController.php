@@ -12,8 +12,8 @@ class SolusiController extends Controller
     public function index()
     {
         $positifnegatif = Positifnegatif::all();
-        $dpositif = Dpositif::all();
-        $dnegatif = Dnegatif::all();
+        $dpositif = Dpositif::paginate(10);
+        $dnegatif = Dnegatif::paginate(10);
         return view('dashboard.solusi.index', [
             'title' => 'Solusi Ideal Positif dan Negatif',
             'active' => 'solusi',
