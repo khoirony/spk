@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Preferensi extends Model
 {
     use HasFactory;
+    protected $table = 'preferensis';
+    protected $primaryKey = 'id';
+
+    protected $guarded = ['id'];
 }

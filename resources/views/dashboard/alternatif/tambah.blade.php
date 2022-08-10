@@ -22,7 +22,7 @@
             </label>
             <input class="form-check-input" type="radio" name="status_bangunan" id="status_bangunan" value="2">
             <label class="form-check-label me-3" for="status_bangunan">
-                <b>2.</b> Kontrakan/Sewa
+                <b>2.</b> Dinas
             </label>
             <input class="form-check-input" type="radio" name="status_bangunan" id="status_bangunan" value="3">
             <label class="form-check-label me-3" for="status_bangunan">
@@ -30,11 +30,7 @@
             </label>
             <input class="form-check-input" type="radio" name="status_bangunan" id="status_bangunan" value="4">
             <label class="form-check-label me-3" for="status_bangunan">
-                <b>4.</b> Dinas
-            </label>
-            <input class="form-check-input" type="radio" name="status_bangunan" id="status_bangunan" value="5">
-            <label class="form-check-label me-3" for="status_bangunan">
-                <b>5.</b> Lainnya
+                <b>4.</b> Kontrakan/Sewa
             </label>
         </div>
 
@@ -47,15 +43,11 @@
             </label>
             <input class="form-check-input" type="radio" name="status_lahan" id="status_lahan" value="2">
             <label class="form-check-label me-3" for="status_lahan">
-                <b>2.</b> Milik Orang Lain
+                <b>2.</b> Tanah Negara
             </label>
             <input class="form-check-input" type="radio" name="status_lahan" id="status_lahan" value="3">
             <label class="form-check-label me-3" for="status_lahan">
-                <b>3.</b> Tanah Negara
-            </label>
-            <input class="form-check-input" type="radio" name="status_lahan" id="status_lahan" value="4">
-            <label class="form-check-label me-3" for="status_lahan">
-                <b>4.</b> Lainnya
+                <b>3.</b> Milik Orang Lain
             </label>
         </div>
 
@@ -73,11 +65,11 @@
             </label>
             <input class="form-check-input" type="radio" name="jenis_lantai" id="jenis_lantai" value="2">
             <label class="form-check-label me-2" for="jenis_lantai">
-                <b>2.</b> Keramik
+                <b>2.</b> Parket/Vinyl
             </label>
             <input class="form-check-input" type="radio" name="jenis_lantai" id="jenis_lantai" value="3">
             <label class="form-check-label me-2" for="jenis_lantai">
-                <b>3.</b> Parket/Vinyl
+                <b>3.</b> Keramik 
             </label>
             <input class="form-check-input" type="radio" name="jenis_lantai" id="jenis_lantai" value="4">
             <label class="form-check-label me-2" for="jenis_lantai">
@@ -103,10 +95,6 @@
                 <input class="form-check-input" type="radio" name="jenis_lantai" id="jenis_lantai" value="9">
                 <label class="form-check-label me-2" for="jenis_lantai">
                     <b>9.</b> Tanah
-                </label>
-                <input class="form-check-input" type="radio" name="jenis_lantai" id="jenis_lantai" value="10">
-                <label class="form-check-label me-2" for="jenis_lantai">
-                    <b>10.</b> Lainnya
                 </label>
             </div>
         </div>
@@ -138,10 +126,6 @@
             <label class="form-check-label me-3" for="jenis_dinding">
                 <b>6.</b> Bambu
             </label>
-            <input class="form-check-input" type="radio" name="jenis_dinding" id="jenis_dinding" value="7">
-            <label class="form-check-label me-3" for="jenis_dinding">
-                <b>7.</b> Lainnya
-            </label>
         </div>
 
         <div class="mb-3">
@@ -170,27 +154,27 @@
 
             <input class="form-check-input" type="radio" name="daya_listrik" id="daya_listrik" value="1">
             <label class="form-check-label me-3" for="daya_listrik">
-                <b>1.</b> 450 Watt
+                <b>1.</b> Tanpa Meteran
             </label>
             <input class="form-check-input" type="radio" name="daya_listrik" id="daya_listrik" value="2">
             <label class="form-check-label me-3" for="daya_listrik">
-                <b>2.</b> 900 Watt
+                <b>2.</b> 450 Watt
             </label>
             <input class="form-check-input" type="radio" name="daya_listrik" id="daya_listrik" value="3">
             <label class="form-check-label me-3" for="daya_listrik">
-                <b>3.</b> 1300 Watt
+                <b>3.</b> 900 Watt
             </label>
             <input class="form-check-input" type="radio" name="daya_listrik" id="daya_listrik" value="4">
             <label class="form-check-label me-3" for="daya_listrik">
-                <b>4.</b> 2200 Watt
+                <b>4.</b> 1300 Watt
             </label>
             <input class="form-check-input" type="radio" name="daya_listrik" id="daya_listrik" value="5">
             <label class="form-check-label me-3" for="daya_listrik">
-                <b>5.</b> >2200 Watt
+                <b>5.</b> 2200 Watt
             </label>
             <input class="form-check-input" type="radio" name="daya_listrik" id="daya_listrik" value="6">
             <label class="form-check-label me-3" for="daya_listrik">
-                <b>6.</b> Tanpa Meteran
+                <b>6.</b> >2200 Watt
             </label>
         </div>
 

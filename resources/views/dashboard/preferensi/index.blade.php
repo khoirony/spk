@@ -12,6 +12,7 @@
         <tr>
             <th scope="col">Alternatif</th>
             <th scope="col">Preferensi</th>
+            <th scope="col">Rangking</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,9 @@
               <th scope="row">{{ $p->name }}</th>
               <td>
                 {{ $p->nilai }}
+              </td>
+              <td>
+                {{ $p->rangking }}
               </td>
             </tr>
             @endforeach

@@ -31,13 +31,11 @@
                 @case(1)
                   Milik Sendiri @break
                 @case(2)
-                  Kontrakan/Sewa @break
+                  Dinas @break
                 @case(3)
                   Bebas Sewa @break
                 @case(4)
-                  Dinas @break
-                @case(5)
-                  Lainnya @break
+                  Kontrakan/Sewa @break
                 @default
                   -kosong-
               @endswitch
@@ -47,11 +45,9 @@
                 @case(1)
                   Milik Sendiri @break
                 @case(2)
-                  Milik Orang lain @break
-                @case(3)
                   Tanah Negara @break
-                @case(4)
-                  Lainnya @break
+                @case(3)
+                  Milik Orang lain @break
                 @default
                   -kosong-
               @endswitch
@@ -64,9 +60,9 @@
                 @case(1)
                   Marmer/Granit @break
                 @case(2)
-                  Kermik @break
-                @case(3)
                   Parket/Vinyl @break
+                @case(3)
+                  Keramik @break
                 @case(4)
                   Ubin/Tegel @break
                 @case(5)
@@ -79,8 +75,6 @@
                   Kayu Berkualitas Rendah @break
                 @case(9)
                   Tanah @break
-                @case(10)
-                  Lainnya @break
                 @default
                   -kosong-
               @endswitch
@@ -99,8 +93,6 @@
                   Batang Kayu @break
                 @case(6)
                   Bambu @break
-                @case(7)
-                  Lainnya @break
                 @default
                   -kosong-
               @endswitch
@@ -122,17 +114,17 @@
             <td>
               @switch($a->daya_listrik)
                 @case(1)
-                  450 Watt @break
-                @case(2)
-                  900 Watt @break
-                @case(3)
-                  1300 Watt @break
-                @case(4)
-                  2200 Watt @break
-                @case(5)
-                  >2200 Watt @break
-                @case(6)
                   Tanpa Meteran @break
+                @case(2)
+                  450 Watt @break
+                @case(3)
+                  900 Watt @break
+                @case(4)
+                  1300 Watt @break
+                @case(5)
+                  2200 Watt @break
+                @case(6)
+                  >2200 Watt @break
                 @default
                   -kosong-
               @endswitch

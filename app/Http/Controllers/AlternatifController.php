@@ -191,8 +191,8 @@ class AlternatifController extends Controller
         foreach ($normalisasi as $n){
             Terbobot::insert([
                 'name' => $n['name'],
-                'status_bangunan' => $n['status_bangunan']*5,
-                'status_lahan' => $n['status_lahan']*5,
+                'status_bangunan' => $n['status_bangunan']*3,
+                'status_lahan' => $n['status_lahan']*3,
                 'luas_lantai' => $n['luas_lantai']*4,
                 'jenis_lantai' => $n['jenis_lantai']*4,
                 'jenis_dinding' => $n['jenis_dinding']*4,
@@ -282,15 +282,27 @@ class AlternatifController extends Controller
                 $nilai = $dn['nilai']/($dn['nilai']+$dp->nilai);
                 Preferensi::insert([
                     'name' => $dn['name'],
-                    'nilai' => $nilai
+                    'nilai' => $nilai,
+                    'rangking' => 0
                 ]);
                 $n++;
             }else{
                 Preferensi::insert([
                     'name' => $dn['name'],
-                    'nilai' => 0
+                    'nilai' => 0,
+                    'rangking' => 0
                 ]);
             }
         }
+
+        //Mengisi Rangking
+        $preferensi = Preferensi::all()->SortByDesc('nilai');
+        $n=1;
+        foreach ($preferensi as $pre){
+            $preferensi = Preferensi::find($pre['id']);
+            $preferensi->rangking = $n++;
+            $preferensi->update();
+        }
+
     }
 }

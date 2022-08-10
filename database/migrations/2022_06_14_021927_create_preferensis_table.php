@@ -17,6 +17,8 @@ class CreatePreferensisTable extends Migration
             $table->id();
             $table->string('name');
             $table->double('nilai', 15, 8)->nullable();
+            $table->integer('rangking');
+            $table->timestamps();
         });
     }
 
