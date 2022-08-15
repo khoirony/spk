@@ -9,7 +9,7 @@ class PreferensiController extends Controller
 {
     public function index()
     {
-        $preferensi = Preferensi::all();
+        $preferensi = Preferensi::all()->SortByDesc('rangking');
         return view('dashboard.preferensi.index', [
             'title' => 'Preferensi',
             'active' => 'preferensi'

@@ -24,7 +24,7 @@
             </label>
             <input class="form-check-input" type="radio" name="status_bangunan" id="status_bangunan" value="2" {{ ($alternatif->status_bangunan === 2) ? 'checked' : '' }}>
             <label class="form-check-label me-3" for="status_bangunan">
-                <b>2.</b> Kontrakan/Sewa
+                <b>2.</b> Dinas
             </label>
             <input class="form-check-input" type="radio" name="status_bangunan" id="status_bangunan" value="3" {{ ($alternatif->status_bangunan === 3) ? 'checked' : '' }}>
             <label class="form-check-label me-3" for="status_bangunan">
@@ -32,7 +32,7 @@
             </label>
             <input class="form-check-input" type="radio" name="status_bangunan" id="status_bangunan" value="4" {{ ($alternatif->status_bangunan === 4) ? 'checked' : '' }}>
             <label class="form-check-label me-3" for="status_bangunan">
-                <b>4.</b> Dinas
+                <b>4.</b> Kontrakan/Sewa
             </label>
         </div>
 

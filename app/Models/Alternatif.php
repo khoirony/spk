@@ -9,8 +9,9 @@ class Alternatif extends Model
 {
     use HasFactory;
 
-    protected $table = 'alternatifs';
-    protected $primaryKey = 'id';
-
     protected $guarded = ['id'];
+    public function warga()
+    {
+        return $this->belongsTo('App\Models\Warga', 'id_warga');
+    }
 }

@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WargaController;
 use App\Http\Controllers\SolusiController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TerbobotController;
 use App\Http\Controllers\AlternatifController;
@@ -34,13 +36,35 @@ Route::get('/dashboard', function(){
     ]);
 })->middleware('auth');
 
-Route::get('/alternatif', [AlternatifController::class, 'index'])->middleware('auth');
+//Kriteria
+Route::get('/kriteria', [KriteriaController::class, 'index'])->middleware('auth');
+Route::get('/tambahkriteria', [KriteriaController::class, 'create'])->middleware('auth');
+Route::post('/kriteriastore', [KriteriaController::class, 'store'])->middleware('auth');
+Route::get('/editkriteria/{id}', [KriteriaController::class, 'edit'])->middleware('auth');
+Route::post('/updatekriteria/{id}', [KriteriaController::class, 'update'])->middleware('auth');
+Route::get('/hapuskriteria/{id}', [KriteriaController::class, 'destroy'])->middleware('auth');
 
+//SubKriteria
+Route::get('/tambahsubkriteria/{id}', [KriteriaController::class, 'subcreate'])->middleware('auth');
+Route::post('/substore', [KriteriaController::class, 'substore'])->middleware('auth');
+Route::get('/subedit/{id}', [KriteriaController::class, 'subedit'])->middleware('auth');
+Route::post('/subupdate/{id}', [KriteriaController::class, 'subupdate'])->middleware('auth');
+Route::get('/subhapus/{id}', [KriteriaController::class, 'subdestroy'])->middleware('auth');
+
+//Warga
+Route::get('/warga', [WargaController::class, 'index'])->middleware('auth');
+Route::get('/tambahwarga', [WargaController::class, 'create'])->middleware('auth');
+Route::post('/wargastore', [WargaController::class, 'store'])->middleware('auth');
+Route::get('/editwarga/{id}', [WargaController::class, 'edit'])->middleware('auth');
+Route::post('/updatewarga/{id}', [WargaController::class, 'update'])->middleware('auth');
+Route::get('/hapuswarga/{id}', [WargaController::class, 'destroy'])->middleware('auth');
+
+
+//Alternatif
+Route::get('/alternatif', [AlternatifController::class, 'index'])->middleware('auth');
 Route::get('/tambah', [AlternatifController::class, 'create'])->middleware('auth');
 Route::post('/store', [AlternatifController::class, 'store'])->middleware('auth');
-
 Route::get('/search', [AlternatifController::class, 'search'])->name('search')->middleware('auth');
-
 Route::get('/edit/{id}', [AlternatifController::class, 'edit'])->middleware('auth');
 Route::put('/update/{id}', [AlternatifController::class, 'update'])->middleware('auth');
 Route::get('/hapus/{id}', [AlternatifController::class, 'destroy'])->middleware('auth');

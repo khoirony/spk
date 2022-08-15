@@ -8,6 +8,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ ($active === "kriteria") ? 'active' : '' }}" href="/kriteria">
+                    <span data-feather="file-text"></span>
+                    Manage Kriteria
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ ($active === "warga") ? 'active' : '' }}" href="/warga">
+                    <span data-feather="file-text"></span>
+                    Manage Warga
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ ($active === "alternatif") ? 'active' : '' }}" href="/alternatif">
                     <span data-feather="file-text"></span>
                     Manage Alternatif
@@ -19,6 +31,12 @@
             <span>TOPSIS</span>
         </h6>
         <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link {{ ($active === "matriks") ? 'active' : '' }}" href="/matriks">
+                    <span data-feather="divide-square"></span>
+                    Matriks Awal
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ ($active === "normalisasi") ? 'active' : '' }}" href="/normalisasi">
                     <span data-feather="divide-square"></span>

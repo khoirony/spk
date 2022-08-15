@@ -53,7 +53,7 @@
               @endswitch
             </td>
             <td>
-              {{ $a->luas_lantai }} M<sup>2</sup>
+              {{ $a->luas_lantai }} M
             </td>
             <td>
               @switch($a->jenis_lantai)

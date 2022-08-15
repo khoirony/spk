@@ -91,8 +91,7 @@ class AlternatifController extends Controller
 
     private function _hitung()
 	{
-        // Mengisi Tabel Pembagi
-        Pembagi::truncate();
+        // Mencari Pembagi
         $alternatif = Alternatif::all();
         
         $status_lahan=0;
@@ -144,43 +143,20 @@ class AlternatifController extends Controller
             $status_bantuan += $kriteria;
         }
 
-        Pembagi::insert([
-            'status_lahan' => sqrt($status_lahan),
-            'status_bangunan' => sqrt($status_bangunan),
-            'luas_lantai' => sqrt($luas_lantai),
-            'jenis_lantai' => sqrt($jenis_lantai),
-            'jenis_dinding' => sqrt($jenis_dinding),
-            'fas_bab' => sqrt($fas_bab),
-            'daya_listrik' => sqrt($daya_listrik),
-            'status_bantuan' => sqrt($status_bantuan)
-        ]);
-
         //Mengisi Tabel Normalisasi
         Normalisasi::truncate();
-        $pembagi = Pembagi::all();
-
-        foreach ($pembagi as $p){
-            $pembagi1 = $p['status_bangunan'];
-            $pembagi2 = $p['status_lahan'];
-            $pembagi3 = $p['luas_lantai'];
-            $pembagi4 = $p['jenis_lantai'];
-            $pembagi5 = $p['jenis_dinding'];
-            $pembagi6 = $p['fas_bab'];
-            $pembagi7 = $p['daya_listrik'];
-            $pembagi8 = $p['status_bantuan'];
-        }
 
         foreach ($alternatif as $a){
             Normalisasi::insert([
                 'name' => $a['name'],
-                'status_bangunan' => $a['status_bangunan']/$pembagi1,
-                'status_lahan' => $a['status_lahan']/$pembagi2,
-                'luas_lantai' => $a['luas_lantai']/$pembagi3,
-                'jenis_lantai' => $a['jenis_lantai']/$pembagi4,
-                'jenis_dinding' => $a['jenis_dinding']/$pembagi5,
-                'fas_bab' => $a['fas_bab']/$pembagi6,
-                'daya_listrik' => $a['daya_listrik']/$pembagi7,
-                'status_bantuan' => $a['status_bantuan']/$pembagi8
+                'status_bangunan' => $a['status_bangunan']/sqrt($status_bangunan),
+                'status_lahan' => $a['status_lahan']/sqrt($status_lahan),
+                'luas_lantai' => $a['luas_lantai']/sqrt($luas_lantai),
+                'jenis_lantai' => $a['jenis_lantai']/sqrt($jenis_lantai),
+                'jenis_dinding' => $a['jenis_dinding']/sqrt($jenis_dinding),
+                'fas_bab' => $a['fas_bab']/sqrt($fas_bab),
+                'daya_listrik' => $a['daya_listrik']/sqrt($daya_listrik),
+                'status_bantuan' => $a['status_bantuan']/sqrt($status_bantuan)
             ]);
         }
 
