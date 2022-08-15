@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePositifnegatifsTable extends Migration
+class CreateDpositifsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreatePositifnegatifsTable extends Migration
      */
     public function up()
     {
-        Schema::create('positifnegatifs', function (Blueprint $table) {
+        Schema::create('dpositifs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_warga')->unique();
-            $table->double('c1')->nullable();
-            $table->double('c2')->nullable();
-            $table->double('c3')->nullable();
-            $table->double('c4')->nullable();
-            $table->double('c5')->nullable();
+            $table->integer('tahun')->nullable();
+            $table->double('nilai', 15, 8)->nullable();
 
             $table->foreign('id_warga')->references('id')->on('wargas'); 
         });
@@ -33,6 +30,6 @@ class CreatePositifnegatifsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('positifnegatifs');
+        Schema::dropIfExists('dpositifs');
     }
 }

@@ -16,6 +16,7 @@ class CreateNormalisasisTable extends Migration
         Schema::create('normalisasis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_warga')->unsigned();
+            $table->integer('tahun')->nullable();
             $table->double('c1')->nullable();
             $table->double('c2')->nullable();
             $table->double('c3')->nullable();

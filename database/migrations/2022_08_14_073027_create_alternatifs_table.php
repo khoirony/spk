@@ -16,6 +16,7 @@ class CreateAlternatifsTable extends Migration
         Schema::create('alternatifs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_warga')->unsigned();
+            $table->integer('tahun')->nullable();
             $table->integer('c1')->nullable();
             $table->integer('c2')->nullable();
             $table->integer('c3')->nullable();
