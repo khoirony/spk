@@ -10,45 +10,28 @@
     <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th scope="col">Alternatif</th>
-            <th scope="col">Status Bangunan</th>
-            <th scope="col">Status Lahan</th>
-            <th scope="col">Luas Lantai</th>
-            <th scope="col">Jenis Lantai</th>
-            <th scope="col">Jenis Dinding</th>
-            <th scope="col">Fasilitas BAB</th>
-            <th scope="col">Daya Listrik</th>
-            <th scope="col">Status Bantuan</th>
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            @foreach ($kriteria as $k)
+              <th scope="col">{{ $k->name }}</th>
+            @endforeach
           </tr>
         </thead>
         <tbody>
           @foreach ($terbobot as $t)
           <tr>
-            <th scope="row">{{ $t->name }}</th>
+            <th scope="row">{{ $no++ }}</th>
             <td>
-              {{ $t->status_bangunan }}
+              {{ $t->warga->name }}
             </td>
+            @foreach ($kriteria as $k)
             <td>
-              {{ $t->status_lahan }}
+              <?php 
+                $id = 'c'.$k->id;
+              ?>
+              {{ $t->$id }}
             </td>
-            <td>
-              {{ $t->luas_lantai }}</sup>
-            </td>
-            <td>
-              {{ $t->jenis_lantai }}
-            </td>
-            <td>
-              {{ $t->jenis_dinding }}
-            </td>
-            <td>
-              {{ $t->fas_bab }}
-            </td>
-            <td>
-              {{ $t->daya_listrik }}
-            </td>
-            <td>
-              {{ $t->status_bantuan }}
-            </td>
+            @endforeach
           </tr>
           @endforeach
         </tbody>

@@ -10,7 +10,7 @@
   <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th scope="col">Alternatif</th>
+            <th scope="col">Nama</th>
             <th scope="col">Preferensi</th>
             <th scope="col">Rangking</th>
         </tr>
@@ -18,7 +18,7 @@
     <tbody>
         @foreach ($preferensi as $p)
             <tr>
-              <th scope="row">{{ $p->name }}</th>
+              <th scope="row">{{ $p->warga->name }}</th>
               <td>
                 {{ $p->nilai }}
               </td>

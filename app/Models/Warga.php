@@ -19,4 +19,24 @@ class Warga extends Model
 	{
 		return $this->hasMany('App\Models\Normalisasi', 'id_warga');
 	}
+
+    public function terbobot() 
+	{
+		return $this->hasMany('App\Models\Terbobot', 'id_warga');
+	}
+
+    public function dpositif() 
+	{
+		return $this->hasMany('App\Models\Dpositif', 'id_warga');
+	}
+
+    public function Dnegatif() 
+	{
+		return $this->hasMany('App\Models\Dnegatif', 'id_warga');
+	}
+
+    public function preferensi() 
+	{
+		return $this->hasMany('App\Models\Preferensi', 'id_warga');
+	}
 }

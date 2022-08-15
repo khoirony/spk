@@ -47,7 +47,6 @@ class WargaController extends Controller
         $alternatif = new Alternatif;
         $normalisasi = new Normalisasi;
         $terbobot = new Terbobot;
-        $positifnegatif = new Positifnegatif;
         $dpositif = new Dpositif;
         $dnegatif = new Dnegatif;
         $preferensi = new Preferensi;
@@ -58,8 +57,6 @@ class WargaController extends Controller
         $normalisasi->save();
         $terbobot->id_warga = $warga->id;
         $terbobot->save();
-        $positifnegatif->id_warga = $warga->id;
-        $positifnegatif->save();
         $dpositif->id_warga = $warga->id;
         $dpositif->save();
         $dnegatif->id_warga = $warga->id;
@@ -94,11 +91,10 @@ class WargaController extends Controller
         $alternatif = Alternatif::where('id_warga', $id)->delete();
         $normalisasi = Normalisasi::where('id_warga', $id)->delete();
         $terbobot = Terbobot::where('id_warga', $id)->delete();
-        $positifnegatif = Positifnegatif::where('id_warga', $id)->delete();
         $dpositif = Dpositif::where('id_warga', $id)->delete();
         $dnegatif = Dnegatif::where('id_warga', $id)->delete();
         $preferensi = Preferensi::where('id_warga', $id)->delete();
-        
+
         $warga = Warga::where('id', $id)->delete();
         return redirect('/warga')->with('success', 'Warga Sukses Dihapus');
     }

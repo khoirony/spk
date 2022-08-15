@@ -11,44 +11,25 @@
         <thead>
             <tr>
                 <th scope="col">+-</th>
-                <th scope="col">Status Bangunan</th>
-                <th scope="col">Status Lahan</th>
-                <th scope="col">Luas Lantai</th>
-                <th scope="col">Jenis Lantai</th>
-                <th scope="col">Jenis Dinding</th>
-                <th scope="col">Fasilitas BAB</th>
-                <th scope="col">Daya Listrik</th>
-                <th scope="col">Status Bantuan</th>
+                @foreach ($kriteria as $k)
+                  <th scope="col">{{ $k->name }}</th>
+                @endforeach
             </tr>
         </thead>
         <tbody>
-            @foreach ($positifnegatif as $pn)
+          @foreach ($positifnegatif as $p)
           <tr>
-            <th scope="row">{{ $pn->name }}</th>
             <td>
-              {{ $pn->status_bangunan }}
+              {{ $p->name }}
             </td>
+            @foreach ($kriteria as $k)
             <td>
-              {{ $pn->status_lahan }}
+              <?php 
+                $id = 'c'.$k->id;
+              ?>
+              {{ $p->$id }}
             </td>
-            <td>
-              {{ $pn->luas_lantai }}</sup>
-            </td>
-            <td>
-              {{ $pn->jenis_lantai }}
-            </td>
-            <td>
-              {{ $pn->jenis_dinding }}
-            </td>
-            <td>
-              {{ $pn->fas_bab }}
-            </td>
-            <td>
-              {{ $pn->daya_listrik }}
-            </td>
-            <td>
-              {{ $pn->status_bantuan }}
-            </td>
+            @endforeach
           </tr>
           @endforeach
         </tbody>
@@ -60,14 +41,14 @@
         <table class="table table-striped table-hover">
           <thead>
               <tr>
-                  <th scope="col">Alternatif</th>
+                  <th scope="col">Nama</th>
                   <th scope="col">Nilai</th>
               </tr>
           </thead>
           <tbody>
             @foreach ($dpositif as $dp)
             <tr>
-              <th scope="row">{{ $dp->name }}</th>
+              <th scope="row">{{ $dp->warga->name }}</th>
               <td>
                 {{ $dp->nilai }}
               </td>
@@ -89,7 +70,7 @@
           <tbody>
             @foreach ($dnegatif as $dn)
             <tr>
-              <th scope="row">{{ $dn->name }}</th>
+              <th scope="row">{{ $dn->warga->name }}</th>
               <td>
                 {{ $dn->nilai }}
               </td>

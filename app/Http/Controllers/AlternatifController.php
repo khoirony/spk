@@ -19,7 +19,7 @@ class AlternatifController extends Controller
     {
 
         $alternatif   = Alternatif::paginate(10);
-        $kriteria   = Kriteria::paginate(10);
+        $kriteria   = Kriteria::all();
         return view('dashboard.alternatif.index', [
             'title' => 'Manage Alternatif',
             'active' => 'alternatif',

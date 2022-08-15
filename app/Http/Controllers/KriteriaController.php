@@ -84,6 +84,20 @@ class KriteriaController extends Controller
     {
         $subkriteria = Subkriteria::where('id_kriteria', $id)->delete();
         $kriteria = kriteria::where('id', $id)->delete();
+
+        $column = 'c'.$id;
+        Schema::table('alternatifs', function (Blueprint $table) use ($column) {
+            $table->dropColumn($column);
+        });
+        Schema::table('normalisasis', function (Blueprint $table) use ($column) {
+            $table->dropColumn($column);
+        });
+        Schema::table('terbobots', function (Blueprint $table) use ($column) {
+            $table->dropColumn($column);
+        });
+        Schema::table('positifnegatifs', function (Blueprint $table) use ($column) {
+            $table->dropColumn($column);
+        });
         return redirect('/kriteria')->with('success', 'Kriteria Sukses Dihapus');
     }
 
