@@ -15,16 +15,12 @@ class CreateAlternatifsTable extends Migration
     {
         Schema::create('alternatifs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('status_bangunan');
-            $table->integer('status_lahan');
-            $table->integer('luas_lantai');
-            $table->integer('jenis_lantai');
-            $table->integer('jenis_dinding');
-            $table->integer('fas_bab');
-            $table->integer('daya_listrik');
-            $table->integer('status_bantuan');
-            $table->foreignId('id_warga')->unique();
+            $table->foreignId('id_warga')->unsigned();
+            $table->integer('c1')->nullable();
+            $table->integer('c2')->nullable();
+            $table->integer('c3')->nullable();
+            $table->integer('c4')->nullable();
+            $table->integer('c5')->nullable();
             $table->timestamps();
 
             $table->foreign('id_warga')->references('id')->on('wargas');  

@@ -15,15 +15,14 @@ class CreateNormalisasisTable extends Migration
     {
         Schema::create('normalisasis', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->double('status_bangunan', 15, 8);
-            $table->double('status_lahan', 15, 8);
-            $table->double('luas_lantai', 15, 8);
-            $table->double('jenis_lantai', 15, 8);
-            $table->double('jenis_dinding', 15, 8);
-            $table->double('fas_bab', 15, 8);
-            $table->double('daya_listrik', 15, 8);
-            $table->double('status_bantuan', 15, 8);
+            $table->foreignId('id_warga')->unsigned();
+            $table->double('c1')->nullable();
+            $table->double('c2')->nullable();
+            $table->double('c3')->nullable();
+            $table->double('c4')->nullable();
+            $table->double('c5')->nullable();
+
+            $table->foreign('id_warga')->references('id')->on('wargas'); 
         });
     }
 

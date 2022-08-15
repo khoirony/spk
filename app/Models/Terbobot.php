@@ -8,8 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Terbobot extends Model
 {
     use HasFactory;
-    protected $table = 'terbobots';
-    protected $primaryKey = 'id';
-
-    protected $guarded = ['id'];
 }

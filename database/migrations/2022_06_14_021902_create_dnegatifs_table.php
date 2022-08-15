@@ -15,8 +15,10 @@ class CreateDnegatifsTable extends Migration
     {
         Schema::create('dnegatifs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->double('nilai', 15, 8);
+            $table->foreignId('id_warga')->unique();
+            $table->double('nilai', 15, 8)->nullable();
+
+            $table->foreign('id_warga')->references('id')->on('wargas'); 
         });
     }
 

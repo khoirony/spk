@@ -15,10 +15,12 @@ class CreatePreferensisTable extends Migration
     {
         Schema::create('preferensis', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('id_warga')->unique();
             $table->double('nilai', 15, 8)->nullable();
-            $table->integer('rangking');
+            $table->integer('rangking')->nullable();;
             $table->timestamps();
+
+            $table->foreign('id_warga')->references('id')->on('wargas'); 
         });
     }
 

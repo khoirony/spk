@@ -8,9 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Normalisasi extends Model
 {
     use HasFactory;
-
-    protected $table = 'normalisasis';
-    protected $primaryKey = 'id';
-
-    protected $guarded = ['id'];
 }

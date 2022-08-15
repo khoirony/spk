@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Kriteria;
 use App\Models\SubKriteria;
 
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
+
 class KriteriaController extends Controller
 {
     public function index()
@@ -36,6 +40,24 @@ class KriteriaController extends Controller
 
         Kriteria::create($request->all());
 
+        $kriteria = Kriteria::all()->SortByDesc('id')->first();
+        $newColumnType = 'integer';
+        $newColumnName = 'c'.$kriteria->id;
+
+        echo $kriteria->id;
+
+        Schema::table('alternatifs', function (Blueprint $table) use ($newColumnType, $newColumnName) {
+            $table->$newColumnType($newColumnName)->nullable();
+        });
+        Schema::table('normalisasis', function (Blueprint $table) use ($newColumnType, $newColumnName) {
+            $table->$newColumnType($newColumnName)->nullable();
+        });
+        Schema::table('terbobots', function (Blueprint $table) use ($newColumnType, $newColumnName) {
+            $table->$newColumnType($newColumnName)->nullable();
+        });
+        Schema::table('positifnegatifs', function (Blueprint $table) use ($newColumnType, $newColumnName) {
+            $table->$newColumnType($newColumnName)->nullable();
+        });
         return redirect('/kriteria')->with('success', 'Kriteria Sukses Ditambahkan');
     }
 

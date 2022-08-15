@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Alternatif;
+use App\Models\Warga;
+use App\Models\Kriteria;
 use App\Models\Pembagi;
 use App\Models\Normalisasi;
 use App\Models\Terbobot;
@@ -16,11 +18,15 @@ class AlternatifController extends Controller
 {
     public function index()
     {
+
         $alternatif   = Alternatif::paginate(10);
+        $kriteria   = Kriteria::paginate(10);
         return view('dashboard.alternatif.index', [
             'title' => 'Manage Alternatif',
             'active' => 'alternatif',
-            'alternatif' => $alternatif
+            'alternatif' => $alternatif,
+            'kriteria' => $kriteria,
+            'no' => 1
         ]);
     }
 
@@ -94,61 +100,72 @@ class AlternatifController extends Controller
         // Mencari Pembagi
         $alternatif = Alternatif::all();
         
-        $status_lahan=0;
-        foreach ($alternatif as $a){
-            $kriteria = 0;
-            $kriteria = pow($a['status_lahan'], 2);
-            $status_lahan += $kriteria;
+        $kriteria = kriteria::all();
+        foreach ($kriteria as $k){
+            $c.$k->id = 0;
+            foreach ($alternatif as $a){
+                $kriteria = 0;
+                $id = 'c'.$k->id;
+                $kriteria = pow($a->$id, 2);
+                $c.$k->id += $kriteria;
+            }
         }
-        $status_bangunan=0;
-        foreach ($alternatif as $a){
-            $kriteria = 0;
-            $kriteria = pow($a['status_bangunan'], 2);
-            $status_bangunan += $kriteria;
-        }
-        $luas_lantai=0;
-        foreach ($alternatif as $a){
-            $kriteria = 0;
-            $kriteria = pow($a['luas_lantai'], 2);
-            $luas_lantai += $kriteria;
-        }
-        $jenis_lantai=0;
-        foreach ($alternatif as $a){
-            $kriteria = 0;
-            $kriteria = pow($a['jenis_lantai'], 2);
-            $jenis_lantai += $kriteria;
-        }
-        $jenis_dinding=0;
-        foreach ($alternatif as $a){
-            $kriteria = 0;
-            $kriteria = pow($a['jenis_dinding'], 2);
-            $jenis_dinding += $kriteria;
-        }
-        $fas_bab=0;
-        foreach ($alternatif as $a){
-            $kriteria = 0;
-            $kriteria = pow($a['fas_bab'], 2);
-            $fas_bab += $kriteria;
-        }
-        $daya_listrik=0;
-        foreach ($alternatif as $a){
-            $kriteria = 0;
-            $kriteria = pow($a['daya_listrik'], 2);
-            $daya_listrik += $kriteria;
-        }
-        $status_bantuan=0;
-        foreach ($alternatif as $a){
-            $kriteria = 0;
-            $kriteria = pow($a['status_bantuan'], 2);
-            $status_bantuan += $kriteria;
-        }
+
+        // $status_lahan=0;
+        // foreach ($alternatif as $a){
+        //     $kriteria = 0;
+        //     $kriteria = pow($a['status_lahan'], 2);
+        //     $status_lahan += $kriteria;
+        // }
+        // $status_bangunan=0;
+        // foreach ($alternatif as $a){
+        //     $kriteria = 0;
+        //     $kriteria = pow($a['status_bangunan'], 2);
+        //     $status_bangunan += $kriteria;
+        // }
+        // $luas_lantai=0;
+        // foreach ($alternatif as $a){
+        //     $kriteria = 0;
+        //     $kriteria = pow($a['luas_lantai'], 2);
+        //     $luas_lantai += $kriteria;
+        // }
+        // $jenis_lantai=0;
+        // foreach ($alternatif as $a){
+        //     $kriteria = 0;
+        //     $kriteria = pow($a['jenis_lantai'], 2);
+        //     $jenis_lantai += $kriteria;
+        // }
+        // $jenis_dinding=0;
+        // foreach ($alternatif as $a){
+        //     $kriteria = 0;
+        //     $kriteria = pow($a['jenis_dinding'], 2);
+        //     $jenis_dinding += $kriteria;
+        // }
+        // $fas_bab=0;
+        // foreach ($alternatif as $a){
+        //     $kriteria = 0;
+        //     $kriteria = pow($a['fas_bab'], 2);
+        //     $fas_bab += $kriteria;
+        // }
+        // $daya_listrik=0;
+        // foreach ($alternatif as $a){
+        //     $kriteria = 0;
+        //     $kriteria = pow($a['daya_listrik'], 2);
+        //     $daya_listrik += $kriteria;
+        // }
+        // $status_bantuan=0;
+        // foreach ($alternatif as $a){
+        //     $kriteria = 0;
+        //     $kriteria = pow($a['status_bantuan'], 2);
+        //     $status_bantuan += $kriteria;
+        // }
 
         //Mengisi Tabel Normalisasi
         Normalisasi::truncate();
 
         foreach ($alternatif as $a){
             Normalisasi::insert([
-                'name' => $a['name'],
+                'name' => $a->warga->name,
                 'status_bangunan' => $a['status_bangunan']/sqrt($status_bangunan),
                 'status_lahan' => $a['status_lahan']/sqrt($status_lahan),
                 'luas_lantai' => $a['luas_lantai']/sqrt($luas_lantai),
