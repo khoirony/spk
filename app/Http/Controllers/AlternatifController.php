@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Alternatif;
 use App\Models\Warga;
 use App\Models\Kriteria;
-use App\Models\Pembagi;
 use App\Models\Normalisasi;
 use App\Models\Terbobot;
 use App\Models\Positifnegatif;
@@ -56,6 +55,7 @@ class AlternatifController extends Controller
         ]);
 
         Alternatif::create($request->all());
+        
 
         $this->_hitung();
         return redirect('/alternatif')->with('success', 'Data Sukses Ditambahkan');

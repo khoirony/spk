@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Warga;
+use App\Models\Alternatif;
+use App\Models\Normalisasi;
+use App\Models\Terbobot;
+use App\Models\Positifnegatif;
+use App\Models\Dpositif;
+use App\Models\Dnegatif;
+use App\Models\Preferensi;
 
 class WargaController extends Controller
 {
@@ -35,6 +42,31 @@ class WargaController extends Controller
 
         Warga::create($request->all());
 
+        $warga = Warga::all()->SortByDesc('id')->first();
+
+        $alternatif = new Alternatif;
+        $normalisasi = new Normalisasi;
+        $terbobot = new Terbobot;
+        $positifnegatif = new Positifnegatif;
+        $dpositif = new Dpositif;
+        $dnegatif = new Dnegatif;
+        $preferensi = new Preferensi;
+
+        $alternatif->id_warga = $warga->id;
+        $alternatif->save();
+        $normalisasi->id_warga = $warga->id;
+        $normalisasi->save();
+        $terbobot->id_warga = $warga->id;
+        $terbobot->save();
+        $positifnegatif->id_warga = $warga->id;
+        $positifnegatif->save();
+        $dpositif->id_warga = $warga->id;
+        $dpositif->save();
+        $dnegatif->id_warga = $warga->id;
+        $dnegatif->save();
+        $preferensi->id_warga = $warga->id;
+        $preferensi->save();
+
         return redirect('/warga')->with('success', 'Warga Sukses Ditambahkan');
     }
 
@@ -59,6 +91,14 @@ class WargaController extends Controller
 
     public function destroy($id)
     {
+        $alternatif = Alternatif::where('id_warga', $id)->delete();
+        $normalisasi = Normalisasi::where('id_warga', $id)->delete();
+        $terbobot = Terbobot::where('id_warga', $id)->delete();
+        $positifnegatif = Positifnegatif::where('id_warga', $id)->delete();
+        $dpositif = Dpositif::where('id_warga', $id)->delete();
+        $dnegatif = Dnegatif::where('id_warga', $id)->delete();
+        $preferensi = Preferensi::where('id_warga', $id)->delete();
+        
         $warga = Warga::where('id', $id)->delete();
         return redirect('/warga')->with('success', 'Warga Sukses Dihapus');
     }

@@ -12,6 +12,11 @@ class Warga extends Model
     protected $guarded = ['id'];
     public function alternatif() 
 	{
-		return $this->hasOne('App\Models\Alternatif', 'id_warga');
+		return $this->hasMany('App\Models\Alternatif', 'id_warga');
+	}
+
+    public function normalisasi() 
+	{
+		return $this->hasMany('App\Models\Normalisasi', 'id_warga');
 	}
 }

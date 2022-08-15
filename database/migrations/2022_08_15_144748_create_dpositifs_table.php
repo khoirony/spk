@@ -17,6 +17,7 @@ class CreateDpositifsTable extends Migration
             $table->id();
             $table->foreignId('id_warga')->unique();
             $table->integer('tahun')->nullable();
+            $table->timestamps();
             $table->double('nilai', 15, 8)->nullable();
 
             $table->foreign('id_warga')->references('id')->on('wargas'); 
