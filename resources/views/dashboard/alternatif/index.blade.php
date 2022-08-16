@@ -34,7 +34,7 @@
             </td>
             @endforeach
             <td>
-                <a href="/tambahalternatif/{{ $a->id }}" class="btn btn-sm btn-warning"><span data-feather="edit"></span></a>
+                <a href="/editalternatif/{{ $a->id }}" class="btn btn-sm btn-warning"><span data-feather="edit"></span></a>
             </td>
           </tr>
           @endforeach

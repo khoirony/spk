@@ -35,6 +35,7 @@ class KriteriaController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'atribut' => 'required',
             'bobot' => 'required'
         ]);
 
@@ -74,6 +75,7 @@ class KriteriaController extends Controller
     {
         $kriteria = Kriteria::find($id);
         $kriteria->name = $request->input('name');
+        $kriteria->atribut = $request->input('atribut');
         $kriteria->bobot = $request->input('bobot');
         $kriteria->update();
 

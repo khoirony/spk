@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Normalisasi</h1>
+    <h1 class="h2">Normalisasi</h1><div class="col text-end pe-3">Periode : </div><div class="col-2"><input type="month" class="form-control" id="periode" name="periode"></div>
 </div>
 
 <div class="container-fluid">

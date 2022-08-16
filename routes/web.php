@@ -62,12 +62,9 @@ Route::get('/hapuswarga/{id}', [WargaController::class, 'destroy'])->middleware(
 
 //Alternatif
 Route::get('/alternatif', [AlternatifController::class, 'index'])->middleware('auth');
-Route::get('/tambah', [AlternatifController::class, 'create'])->middleware('auth');
-Route::post('/store', [AlternatifController::class, 'store'])->middleware('auth');
 Route::get('/search', [AlternatifController::class, 'search'])->name('search')->middleware('auth');
-Route::get('/edit/{id}', [AlternatifController::class, 'edit'])->middleware('auth');
-Route::put('/update/{id}', [AlternatifController::class, 'update'])->middleware('auth');
-Route::get('/hapus/{id}', [AlternatifController::class, 'destroy'])->middleware('auth');
+Route::get('/editalternatif/{id}', [AlternatifController::class, 'edit'])->middleware('auth');
+Route::put('/updatealternatif/{id}', [AlternatifController::class, 'update'])->middleware('auth');
 
 Route::get('/normalisasi', [NormalisasiController::class, 'index'])->middleware('auth');
 
@@ -76,3 +73,4 @@ Route::get('/terbobot', [TerbobotController::class, 'index'])->middleware('auth'
 Route::get('/solusi', [SolusiController::class, 'index'])->middleware('auth');
 
 Route::get('/preferensi', [PreferensiController::class, 'index'])->middleware('auth');
+Route::post('/preferensi', [PreferensiController::class, 'index'])->middleware('auth');

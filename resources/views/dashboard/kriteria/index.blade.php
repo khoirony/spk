@@ -27,10 +27,13 @@
                 <div class="col-1 p-3">
                     Kode
                 </div>
-                <div class="col-5 p-3">
+                <div class="col-4 p-3">
                     Nama Kriteria
                 </div>
-                <div class="col-5 p-3">
+                <div class="col-4 p-3">
+                    Atribut Kriteria
+                </div>
+                <div class="col-3 p-3">
                     Bobot Kriteria
                 </div>
             </div>
@@ -46,10 +49,13 @@
                 <div class="col-1 p-3">
                     C{{ $no++ }}
                 </div>
-                <div class="col-5 p-3">
+                <div class="col-4 p-3">
                     {{ $k->name }}
                 </div>
-                <div class="col-5 p-3">
+                <div class="col-4 p-3">
+                    {{ $k->atribut }}
+                </div>
+                <div class="col-3 p-3">
                     {{ $k->bobot }}
                 </div>
             </a>
@@ -66,10 +72,10 @@
                 @else
                     <div class="card">
                         <div class="d-flex bg-success text-decoration-none fw-bold text-white border-0">
-                            <div class="col-5 p-3">
+                            <div class="col-4 p-3">
                                 Nama Sub Kriteria
                             </div>
-                            <div class="col-5 p-3">
+                            <div class="col-6 p-3">
                                 Bobot Sub Kriteria
                             </div>
                             <div class="col-2 p-3">
@@ -79,10 +85,10 @@
                     </div>
                     @foreach ($k->subkriteria as $sub)
                     <div class="d-flex bg-white text-decoration-none text-dark border-top">
-                        <div class="col-5 p-3">
+                        <div class="col-4 p-3">
                             {{ $sub->name }}
                         </div>
-                        <div class="col-5 p-3">
+                        <div class="col-6 p-3">
                             {{ $sub->bobot }}
                         </div>
                         <div class="col-2 p-3">

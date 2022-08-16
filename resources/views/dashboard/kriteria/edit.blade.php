@@ -15,6 +15,15 @@
         </div>
 
         <div class="mb-3">
+            <label for="atribut" class="mb-2 fw-bold">Atribut Kriteria</label>
+            <select class="form-select"  id="atribut" name="atribut">
+                <option value="{{$kriteria->atribut}}">{{$kriteria->atribut}}</option>
+                <option value="benefit">benefit</option>
+                <option value="cost">cost</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="bobot" class="mb-2 fw-bold">Bobot Kriteria</label>
             <input type="text" class="form-control" id="bobot" name="bobot" placeholder="1-5" value="{{$kriteria->bobot}}">
         </div>
