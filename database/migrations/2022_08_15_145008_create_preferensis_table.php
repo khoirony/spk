@@ -15,8 +15,8 @@ class CreatePreferensisTable extends Migration
     {
         Schema::create('preferensis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_warga')->unique();
-            $table->integer('tahun')->nullable();
+            $table->foreignId('id_warga')->unsigned();
+            $table->string('periode')->nullable();
             $table->double('nilai', 15, 8)->nullable();
             $table->integer('rangking')->nullable();;
             $table->timestamps();

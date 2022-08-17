@@ -15,8 +15,8 @@ class CreateTerbobotsTable extends Migration
     {
         Schema::create('terbobots', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_warga')->unique();
-            $table->integer('tahun')->nullable();
+            $table->foreignId('id_warga')->unsigned();
+            $table->string('periode')->nullable();
             $table->timestamps();
             $table->double('c1')->nullable();
             $table->double('c2')->nullable();

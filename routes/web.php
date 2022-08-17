@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\SolusiController;
+use App\Http\Controllers\MatriksController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TerbobotController;
@@ -62,9 +63,14 @@ Route::get('/hapuswarga/{id}', [WargaController::class, 'destroy'])->middleware(
 
 //Alternatif
 Route::get('/alternatif', [AlternatifController::class, 'index'])->middleware('auth');
+Route::post('/alternatif', [AlternatifController::class, 'index'])->middleware('auth');
 Route::get('/search', [AlternatifController::class, 'search'])->name('search')->middleware('auth');
 Route::get('/editalternatif/{id}', [AlternatifController::class, 'edit'])->middleware('auth');
+Route::post('/editalternatif/{id}', [AlternatifController::class, 'edit'])->middleware('auth');
 Route::put('/updatealternatif/{id}', [AlternatifController::class, 'update'])->middleware('auth');
+
+Route::get('/matriks', [MatriksController::class, 'index'])->middleware('auth');
+Route::post('/matriks', [MatriksController::class, 'index'])->middleware('auth');
 
 Route::get('/normalisasi', [NormalisasiController::class, 'index'])->middleware('auth');
 

@@ -51,18 +51,18 @@ class WargaController extends Controller
         $dnegatif = new Dnegatif;
         $preferensi = new Preferensi;
 
-        $alternatif->id_warga = $warga->id;
-        $alternatif->save();
-        $normalisasi->id_warga = $warga->id;
-        $normalisasi->save();
-        $terbobot->id_warga = $warga->id;
-        $terbobot->save();
-        $dpositif->id_warga = $warga->id;
-        $dpositif->save();
-        $dnegatif->id_warga = $warga->id;
-        $dnegatif->save();
-        $preferensi->id_warga = $warga->id;
-        $preferensi->save();
+        // $alternatif->id_warga = $warga->id;
+        // $alternatif->save();
+        // $normalisasi->id_warga = $warga->id;
+        // $normalisasi->save();
+        // $terbobot->id_warga = $warga->id;
+        // $terbobot->save();
+        // $dpositif->id_warga = $warga->id;
+        // $dpositif->save();
+        // $dnegatif->id_warga = $warga->id;
+        // $dnegatif->save();
+        // $preferensi->id_warga = $warga->id;
+        // $preferensi->save();
 
         return redirect('/warga')->with('success', 'Warga Sukses Ditambahkan');
     }

@@ -15,7 +15,7 @@ class CreatePositifnegatifsTable extends Migration
     {
         Schema::create('positifnegatifs', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun')->nullable();
+            $table->string('periode')->nullable();
             $table->timestamps();
             $table->string('name');
             $table->double('c1')->nullable();

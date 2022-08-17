@@ -15,8 +15,8 @@ class CreateDnegatifsTable extends Migration
     {
         Schema::create('dnegatifs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_warga')->unique();
-            $table->integer('tahun')->nullable();
+            $table->foreignId('id_warga')->unsigned();
+            $table->string('periode')->nullable();
             $table->timestamps();
             $table->double('nilai', 15, 8)->nullable();
 

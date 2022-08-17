@@ -19,18 +19,24 @@
                     Manage Warga
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ ($active === "alternatif") ? 'active' : '' }}" href="/alternatif">
                     <span data-feather="file-text"></span>
                     Manage Alternatif
                 </a>
-            </li>
+            </li> --}}
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>TOPSIS</span>
         </h6>
         <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link {{ ($active === "matriks") ? 'active' : '' }}" href="/matriks">
+                    <span data-feather="file-text"></span>
+                    Matriks Awal
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ ($active === "normalisasi") ? 'active' : '' }}" href="/normalisasi">
                     <span data-feather="divide-square"></span>

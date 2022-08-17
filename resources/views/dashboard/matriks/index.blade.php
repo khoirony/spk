@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Manage Alternatif</h1> <div class="col text-end pe-3">Periode : </div><div class="col-2"><form action="/alternatif" method="post"> @csrf <input type="month" class="form-control" id="periode" name="periode" onchange="this.form.submit();"></form></div>
+    <h1 class="h2">Matriks Awal</h1> <div class="col text-end pe-3">Periode : </div><div class="col-2"><form action="/matriks" method="post"> @csrf <input type="month" class="form-control" id="periode" name="periode" onchange="this.form.submit();"></form></div>
 </div>
 
 {{ $periode }}
@@ -16,11 +16,10 @@
             @foreach ($kriteria as $k)
               <th scope="col">{{ $k->name }}</th>
             @endforeach
-            <th scope="col" style="text-align: center;width:90px;">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($alternatif as $a)
+          @foreach ($matriks as $a)
           <tr>
             <th scope="row">{{ $no++ }}</th>
             <td>
@@ -34,13 +33,10 @@
               {{ $a->$id }}
             </td>
             @endforeach
-            <td>
-                <a href="/editalternatif/{{ $a->id }}" class="btn btn-sm btn-warning"><span data-feather="edit"></span></a>
-            </td>
           </tr>
           @endforeach
         </tbody>
       </table>
 </div>
-{{ $alternatif->links() }}
+{{ $matriks->links() }}
 @endsection

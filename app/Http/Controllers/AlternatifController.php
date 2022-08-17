@@ -15,16 +15,22 @@ use App\Models\Preferensi;
 
 class AlternatifController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $alternatif   = Alternatif::paginate(10);
+        $periode = $request->periode;
+        if($periode == 0){
+            $periode =  date("Y-m");
+        }
+
+        $alternatif   = Alternatif::where('periode', $periode)->paginate(10);
         $kriteria   = Kriteria::all();
         return view('dashboard.alternatif.index', [
             'title' => 'Manage Alternatif',
             'active' => 'alternatif',
             'alternatif' => $alternatif,
             'kriteria' => $kriteria,
+            'periode' => $periode,
             'no' => 1
         ]);
     }
@@ -40,43 +46,87 @@ class AlternatifController extends Controller
         ])->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $alternatif = Alternatif::find($id);
+        $periode = $request->periode;
+        if($periode == 0){
+            $periode =  date("Y-m");
+        }
+
+        $alternatif = Alternatif::where('id_warga', $id)->where('periode', $periode)->first();
+        $cekalternatif = Alternatif::where('id_warga', $id)->where('periode', $periode)->count();
+        $warga = Warga::where('id', $id)->first();
         $kriteria   = Kriteria::all();
         return view('dashboard.alternatif.edit',[
             'title' => 'Edit Data',
             'active' => 'alternatif',
             'kriteria' => $kriteria,
-            'alternatif' => $alternatif
+            'alternatif' => $alternatif,
+            'cekalternatif' => $cekalternatif,
+            'warga' => $warga,
+            'periode' => $periode,
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        $alternatif = Alternatif::find($id);
+        $cekalternatif = Alternatif::where('id_warga', $id)->where('periode', $request->input('periode'))->count();
+
+        if($cekalternatif == 0){
+            $alternatif = new Alternatif;
+            $alternatif->id_warga = $id;
+        }else{
+            $alternatif = Alternatif::where('id_warga', $id)->where('periode', $request->input('periode'))->first();
+        }
+
         $kriteria   = Kriteria::all();
         foreach ($kriteria as $k){
             $kolom = 'c'.$k->id;
             $alternatif->$kolom = $request->input($kolom);
         }
-        $alternatif->update();
 
-        $this->_hitung();
-        return redirect('/alternatif')->with('success', 'Data Sukses Diedit');
+        if($cekalternatif == 0){
+            $alternatif->periode = $request->input('periode');
+            $alternatif->save();
+
+            $normalisasi = new Normalisasi;
+            $normalisasi->id_warga = $id;
+            $normalisasi->periode = $request->input('periode');
+            $normalisasi->save();
+
+            $terbobot = new Terbobot;
+            $terbobot->id_warga = $id;
+            $terbobot->periode = $request->input('periode');
+            $terbobot->save();
+
+            $dpositif = new Dpositif;
+            $dpositif->id_warga = $id;
+            $dpositif->periode = $request->input('periode');
+            $dpositif->save();
+
+            $dnegatif = new Dnegatif;
+            $dnegatif->id_warga = $id;
+            $dnegatif->periode = $request->input('periode');
+            $dnegatif->save();
+
+            $preferensi = new Preferensi;
+            $preferensi->id_warga = $id;
+            $preferensi->periode = $request->input('periode');
+            $preferensi->save();
+        }else{
+            $alternatif->update();
+        }
+
+
+        $periode = $request->input('periode');
+        $this->_hitung($periode);
+        return redirect('/warga')->with('success', 'Data Sukses Diedit');
     }
 
-    public function destroy($id)
-    {
-        $alternatif = Alternatif::where('id', $id)->delete();
-        $this->_hitung();
-        return redirect('/alternatif')->with('success', 'Data Sukses Dihapus');
-    }
-
-    private function _hitung()
+    private function _hitung($periode)
 	{
         // Mencari Pembagi
-        $alternatif = Alternatif::all();
+        $alternatif = Alternatif::where('periode', $periode)->get();
         $kriteria = kriteria::all();
         foreach ($kriteria as $k){
             $isi['c'.$k->id] = 0;
@@ -89,33 +139,39 @@ class AlternatifController extends Controller
         }
 
         //Mengisi Tabel Normalisasi
+        $alternatif = Alternatif::where('periode', $periode)->get();
         foreach ($alternatif as $a){
             $kriteria = kriteria::all();
-            $normalisasi = Normalisasi::where('id_warga', $a->id_warga)->first();
+            $normalisasi = Normalisasi::where('id_warga', $a->id_warga)->where('periode', $periode)->first();
             foreach ($kriteria as $k){
                 $kolom = 'c'.$k->id;
                 $normalisasi->$kolom = $a->$kolom/sqrt($isi['c'.$k->id]);
+                $total = $a->$kolom/sqrt($isi['c'.$k->id]);
+                
             }
+            $normalisasi->periode = $periode;
             $normalisasi->update();
         }
 
         //Mengisi Tabel Normalisasi Terbobot
-        $normalisasi = Normalisasi::all();
-
+        $normalisasi = Normalisasi::where('periode', $periode)->get();
         foreach ($normalisasi as $n){
-            $terbobot = Terbobot::where('id_warga', $n->id_warga)->first();
+            $terbobot = Terbobot::where('id_warga', $n->id_warga)->where('periode', $periode)->first();
             foreach ($kriteria as $k){
                 $kolom = 'c'.$k->id;
                 $terbobot->$kolom = $n->$kolom*$k->bobot;
             }
+            $terbobot->periode = $periode;
             $terbobot->update();
         }
 
         //Mengisi Tabel PositifNegatif
-        Positifnegatif::truncate();
+        Positifnegatif::where('periode', $periode)->delete();
 
         $positifnegatif = new Positifnegatif;
         $positifnegatif->name = 'Positif';
+
+        $kriteria = kriteria::all();
         foreach ($kriteria as $k){
             $kolom = 'c'.$k->id;
             if($k->atribut == 'benefit'){
@@ -124,6 +180,7 @@ class AlternatifController extends Controller
                 $positifnegatif->$kolom = Terbobot::min('c'.$k->id);
             }
         }
+        $positifnegatif->periode = $periode;
         $positifnegatif->save();
 
         $positifnegatif = new Positifnegatif;
@@ -136,11 +193,12 @@ class AlternatifController extends Controller
                 $positifnegatif->$kolom = Terbobot::max('c'.$k->id);
             }
         }
+        $positifnegatif->periode = $periode;
         $positifnegatif->save();
 
         //Mengisi Tabel D Positif
-        $positif = Positifnegatif::where('name', 'Positif')->first();
-        $terbobot = Terbobot::all();
+        $positif = Positifnegatif::where('name', 'Positif')->where('periode', $periode)->first();
+        $terbobot = Terbobot::where('periode', $periode)->get();
         foreach ($terbobot as $t){
             $kriteria = kriteria::all();
             $total = 0;
@@ -151,14 +209,15 @@ class AlternatifController extends Controller
                 $total += $hasil;
             }
 
-            $dpositif = Dpositif::where('id_warga', $t->id_warga)->first();
+            $dpositif = Dpositif::where('id_warga', $t->id_warga)->where('periode', $periode)->first();
             $dpositif->nilai = sqrt($total);
+            $dpositif->periode = $t->periode;
             $dpositif->update();
         }
 
         //Mengisi Tabel D Negatif
-        $negatif = Positifnegatif::where('name', 'Negatif')->first();
-        $terbobot = Terbobot::all();
+        $negatif = Positifnegatif::where('name', 'Negatif')->where('periode', $periode)->first();
+        $terbobot = Terbobot::where('periode', $periode)->get();
         foreach ($terbobot as $t){
             $kriteria = kriteria::all();
             $total = 0;
@@ -169,24 +228,26 @@ class AlternatifController extends Controller
                 $total += $hasil;
             }
 
-            $dnegatif = Dnegatif::where('id_warga', $t->id_warga)->first();
+            $dnegatif = Dnegatif::where('id_warga', $t->id_warga)->where('periode', $periode)->first();
             $dnegatif->nilai = sqrt($total);
+            $dnegatif->periode = $t->periode;
             $dnegatif->update();
         }
 
         //Mengisi Tabel Preferensi
-        $dnegatif = Dnegatif::all();
+        $dnegatif = Dnegatif::where('periode', $periode)->get();
 
         foreach ($dnegatif as $dn){
-            $dpositif = Dpositif::where('id_warga', $dn->id_warga)->first();
-            $preferensi = Preferensi::where('id_warga', $dn->id_warga)->first();
+            $dpositif = Dpositif::where('id_warga', $dn->id_warga)->where('periode', $periode)->first();
+            $preferensi = Preferensi::where('id_warga', $dn->id_warga)->where('periode', $periode)->first();
             $preferensi->nilai = $dn->nilai/($dn->nilai+$dpositif->nilai);
+            $preferensi->periode = $dn->periode;
             $preferensi->update();
         }
 
         //Mengisi Rangking
         
-        $preferensi = Preferensi::all()->SortByDesc('nilai');
+        $preferensi = Preferensi::where('periode', $periode)->orderBy('nilai', 'desc')->get();
         $n=1;
         foreach ($preferensi as $pre){
             $preferensi = Preferensi::find($pre['id']);
