@@ -17,7 +17,6 @@ class AlternatifController extends Controller
 {
     public function index(Request $request)
     {
-
         $periode = $request->periode;
         if($periode == 0){
             $periode =  date("Y-m");
@@ -175,9 +174,9 @@ class AlternatifController extends Controller
         foreach ($kriteria as $k){
             $kolom = 'c'.$k->id;
             if($k->atribut == 'benefit'){
-                $positifnegatif->$kolom = Terbobot::max('c'.$k->id);
+                $positifnegatif->$kolom = Terbobot::where('periode', $periode)->max('c'.$k->id);
             }else{
-                $positifnegatif->$kolom = Terbobot::min('c'.$k->id);
+                $positifnegatif->$kolom = Terbobot::where('periode', $periode)->min('c'.$k->id);
             }
         }
         $positifnegatif->periode = $periode;
@@ -188,9 +187,9 @@ class AlternatifController extends Controller
         foreach ($kriteria as $k){
             $kolom = 'c'.$k->id;
             if($k->atribut == 'benefit'){
-                $positifnegatif->$kolom = Terbobot::min('c'.$k->id);
+                $positifnegatif->$kolom = Terbobot::where('periode', $periode)->min('c'.$k->id);
             }else{
-                $positifnegatif->$kolom = Terbobot::max('c'.$k->id);
+                $positifnegatif->$kolom = Terbobot::where('periode', $periode)->max('c'.$k->id);
             }
         }
         $positifnegatif->periode = $periode;

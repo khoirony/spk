@@ -9,20 +9,30 @@ class PreferensiController extends Controller
 {
     public function index(Request $request)
     {
+        $periode = $request->periode;
+        if($periode == 0){
+            $periode =  date("Y-m");
+        }
+
         if($request->sort == 1){
             $sort = $request->sort;
-            $preferensi = Preferensi::all()->SortBy('rangking');
+            $preferensi = Preferensi::where('periode', $periode)->orderBy('rangking', 'asc')->get();
         }else if($request->sort == 2){
             $sort = $request->sort;
-            $preferensi = Preferensi::all()->SortByDesc('rangking');
+            $preferensi = Preferensi::where('periode', $periode)->orderBy('rangking', 'desc')->get();
         }else{
             $sort = 0;
-            $preferensi = Preferensi::all();
+            $preferensi = Preferensi::where('periode', $periode)->get();
         }
+
+        
+
         return view('dashboard.preferensi.index', [
             'title' => 'Preferensi',
             'active' => 'preferensi',
-            'sort' => $sort
-        ])->with('preferensi', $preferensi);
+            'preferensi' => $preferensi,
+            'sort' => $sort,
+            'periode' => $periode,
+        ]);
     }
 }

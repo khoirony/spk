@@ -10,11 +10,16 @@ use App\Models\Kriteria;
 
 class SolusiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $positifnegatif = Positifnegatif::all();
-        $dpositif = Dpositif::paginate(10);
-        $dnegatif = Dnegatif::paginate(10);
+        $periode = $request->periode;
+        if($periode == 0){
+            $periode =  date("Y-m");
+        }
+
+        $positifnegatif = Positifnegatif::where('periode', $periode)->get();
+        $dpositif = Dpositif::where('periode', $periode)->paginate(10);
+        $dnegatif = Dnegatif::where('periode', $periode)->paginate(10);
         $kriteria   = Kriteria::all();
         return view('dashboard.solusi.index', [
             'title' => 'Solusi Ideal Positif dan Negatif',
@@ -23,6 +28,7 @@ class SolusiController extends Controller
             'dpositif' => $dpositif,
             'dnegatif' => $dnegatif,
             'kriteria' => $kriteria,
+            'periode' => $periode,
             'no' => 1
         ]);
     }

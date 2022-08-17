@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Preferensi</h1> <div class="col text-end pe-3">Periode : </div><div class="col-2"><input type="month" class="form-control" id="periode" name="periode"></div>
+    <h1 class="h2">Preferensi</h1> <div class="col text-end pe-3">Periode : </div><div class="col-2"><form action="/preferensi" method="post"> @csrf <input type="month" class="form-control" id="periode" name="periode" value="{{ $periode }}" onchange="this.form.submit();"></form></div>
 </div>
 
 <div class="container-fluid">
@@ -21,8 +21,10 @@
                     @csrf
                     @if($sort == 0)
                     <input type="hidden" id="sort" name="sort" value="1">
+                    <input type="hidden" id="periode" name="periode" value="{{ $periode }}">
                     @elseif($sort == 1)
                     <input type="hidden" id="sort" name="sort" value="2">
+                    <input type="hidden" id="periode" name="periode" value="{{ $periode }}">
                     @endif
                     <button type="submit" class="border-0 bg-white w-25">
                       <span data-feather="chevrons-up"></span>

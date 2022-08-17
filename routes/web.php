@@ -73,10 +73,13 @@ Route::get('/matriks', [MatriksController::class, 'index'])->middleware('auth');
 Route::post('/matriks', [MatriksController::class, 'index'])->middleware('auth');
 
 Route::get('/normalisasi', [NormalisasiController::class, 'index'])->middleware('auth');
+Route::post('/normalisasi', [NormalisasiController::class, 'index'])->middleware('auth');
 
 Route::get('/terbobot', [TerbobotController::class, 'index'])->middleware('auth');
+Route::post('/terbobot', [TerbobotController::class, 'index'])->middleware('auth');
 
 Route::get('/solusi', [SolusiController::class, 'index'])->middleware('auth');
+Route::post('/solusi', [SolusiController::class, 'index'])->middleware('auth');
 
 Route::get('/preferensi', [PreferensiController::class, 'index'])->middleware('auth');
 Route::post('/preferensi', [PreferensiController::class, 'index'])->middleware('auth');
