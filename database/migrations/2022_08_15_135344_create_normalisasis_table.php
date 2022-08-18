@@ -18,11 +18,14 @@ class CreateNormalisasisTable extends Migration
             $table->foreignId('id_warga')->unsigned();
             $table->string('periode')->nullable();
             $table->timestamps();
-            $table->double('c1')->nullable();
-            $table->double('c2')->nullable();
-            $table->double('c3')->nullable();
-            $table->double('c4')->nullable();
-            $table->double('c5')->nullable();
+            $table->double('c1', 15, 8)->nullable();
+            $table->double('c2', 15, 8)->nullable();
+            $table->double('c3', 15, 8)->nullable();
+            $table->double('c4', 15, 8)->nullable();
+            $table->double('c5', 15, 8)->nullable();
+            $table->double('c6', 15, 8)->nullable();
+            $table->double('c7', 15, 8)->nullable();
+            $table->double('c8', 15, 8)->nullable();
 
             $table->foreign('id_warga')->references('id')->on('wargas'); 
         });

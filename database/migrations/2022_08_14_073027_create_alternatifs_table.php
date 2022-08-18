@@ -22,6 +22,9 @@ class CreateAlternatifsTable extends Migration
             $table->integer('c3')->nullable();
             $table->integer('c4')->nullable();
             $table->integer('c5')->nullable();
+            $table->integer('c6')->nullable();
+            $table->integer('c7')->nullable();
+            $table->integer('c8')->nullable();
             $table->timestamps();
 
             $table->foreign('id_warga')->references('id')->on('wargas');  

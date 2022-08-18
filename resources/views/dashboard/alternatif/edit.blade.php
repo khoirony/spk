@@ -13,7 +13,8 @@
         <input type="hidden" id="periode" name="periode" value="{{ $periode }}"> 
 
         <div class="mb-3">
-            Nama : {{ $warga->name }} <br>
+            <label class="mb-2 fw-bold">Nama : </label> {{ $warga->name }} <br>
+            <label class="mb-2 fw-bold">Alamat : </label> {{ $warga->alamat }} <br>
         </div>
 
         @foreach ($kriteria as $k)

@@ -239,7 +239,9 @@ class AlternatifController extends Controller
         foreach ($dnegatif as $dn){
             $dpositif = Dpositif::where('id_warga', $dn->id_warga)->where('periode', $periode)->first();
             $preferensi = Preferensi::where('id_warga', $dn->id_warga)->where('periode', $periode)->first();
-            $preferensi->nilai = $dn->nilai/($dn->nilai+$dpositif->nilai);
+            if($dn->nilai != null){
+                $preferensi->nilai = $dn->nilai/($dn->nilai+$dpositif->nilai);
+            }
             $preferensi->periode = $dn->periode;
             $preferensi->update();
         }

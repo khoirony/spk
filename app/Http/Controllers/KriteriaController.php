@@ -42,22 +42,23 @@ class KriteriaController extends Controller
         Kriteria::create($request->all());
 
         $kriteria = Kriteria::all()->SortByDesc('id')->first();
-        $newColumnType = 'integer';
+        $newColumnType1 = 'integer';
+        $newColumnType2 = 'double';
         $newColumnName = 'c'.$kriteria->id;
 
         echo $kriteria->id;
 
-        Schema::table('alternatifs', function (Blueprint $table) use ($newColumnType, $newColumnName) {
-            $table->$newColumnType($newColumnName)->nullable();
+        Schema::table('alternatifs', function (Blueprint $table) use ($newColumnType1, $newColumnName) {
+            $table->$newColumnType1($newColumnName)->nullable();
         });
-        Schema::table('normalisasis', function (Blueprint $table) use ($newColumnType, $newColumnName) {
-            $table->$newColumnType($newColumnName)->nullable();
+        Schema::table('normalisasis', function (Blueprint $table) use ($newColumnType2, $newColumnName) {
+            $table->$newColumnType2($newColumnName, 5, 8)->nullable();
         });
-        Schema::table('terbobots', function (Blueprint $table) use ($newColumnType, $newColumnName) {
-            $table->$newColumnType($newColumnName)->nullable();
+        Schema::table('terbobots', function (Blueprint $table) use ($newColumnType2, $newColumnName) {
+            $table->$newColumnType2($newColumnName, 5, 8)->nullable();
         });
-        Schema::table('positifnegatifs', function (Blueprint $table) use ($newColumnType, $newColumnName) {
-            $table->$newColumnType($newColumnName)->nullable();
+        Schema::table('positifnegatifs', function (Blueprint $table) use ($newColumnType2, $newColumnName) {
+            $table->$newColumnType2($newColumnName, 5, 8)->nullable();
         });
         return redirect('/kriteria')->with('success', 'Kriteria Sukses Ditambahkan');
     }
