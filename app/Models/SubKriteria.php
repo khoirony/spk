@@ -10,7 +10,7 @@ class SubKriteria extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    public function subKriteria()
+    public function kriteria()
     {
         return $this->belongsTo('App\Models\Kriteria', 'id_kriteria');
     }

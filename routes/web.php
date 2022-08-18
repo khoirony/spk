@@ -62,8 +62,6 @@ Route::get('/hapuswarga/{id}', [WargaController::class, 'destroy'])->middleware(
 
 
 //Alternatif
-Route::get('/alternatif', [AlternatifController::class, 'index'])->middleware('auth');
-Route::post('/alternatif', [AlternatifController::class, 'index'])->middleware('auth');
 Route::get('/search', [AlternatifController::class, 'search'])->name('search')->middleware('auth');
 Route::get('/editalternatif/{id}', [AlternatifController::class, 'edit'])->middleware('auth');
 Route::post('/editalternatif/{id}', [AlternatifController::class, 'edit'])->middleware('auth');

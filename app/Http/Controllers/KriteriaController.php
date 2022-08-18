@@ -106,10 +106,12 @@ class KriteriaController extends Controller
 
     public function subcreate($id)
     {
+        $kriteria   = Kriteria::find($id);
         return view('dashboard.subkriteria.tambah', [
             'title' => 'Tambah Sub Kriteria',
             'active' => 'kriteria',
-            'id' => $id
+            'id' => $id,
+            'kriteria' => $kriteria
         ]);
     }
 

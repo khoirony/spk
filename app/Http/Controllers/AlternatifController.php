@@ -15,25 +15,6 @@ use App\Models\Preferensi;
 
 class AlternatifController extends Controller
 {
-    public function index(Request $request)
-    {
-        $periode = $request->periode;
-        if($periode == 0){
-            $periode =  date("Y-m");
-        }
-
-        $alternatif   = Alternatif::where('periode', $periode)->paginate(10);
-        $kriteria   = Kriteria::all();
-        return view('dashboard.alternatif.index', [
-            'title' => 'Manage Alternatif',
-            'active' => 'alternatif',
-            'alternatif' => $alternatif,
-            'kriteria' => $kriteria,
-            'periode' => $periode,
-            'no' => 1
-        ]);
-    }
-
     public function search(Request $request)
     {
         $keyword = $request->search;
@@ -58,7 +39,7 @@ class AlternatifController extends Controller
         $kriteria   = Kriteria::all();
         return view('dashboard.alternatif.edit',[
             'title' => 'Edit Data',
-            'active' => 'alternatif',
+            'active' => 'warga',
             'kriteria' => $kriteria,
             'alternatif' => $alternatif,
             'cekalternatif' => $cekalternatif,

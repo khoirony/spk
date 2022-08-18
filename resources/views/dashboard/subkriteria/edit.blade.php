@@ -10,6 +10,11 @@
     <form action="/subupdate/{{ $subkriteria->id }}" method="POST">
         @csrf
         <div class="mb-3">
+            <label class="mb-2 fw-bold">Kriteria : </label> {{ $subkriteria->kriteria->name }} <br>
+            <label class="mb-2 fw-bold">Atribut : </label> {{ $subkriteria->kriteria->atribut }} <br>
+        </div>
+
+        <div class="mb-3">
             <label for="nama_kriteria" class="mb-2 fw-bold">Nama Kriteria</label>
             <input type="text" class="form-control" id="name" name="name" value="{{$subkriteria->name}}">
         </div>

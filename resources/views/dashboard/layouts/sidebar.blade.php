@@ -33,7 +33,7 @@
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
                 <a class="nav-link {{ ($active === "matriks") ? 'active' : '' }}" href="/matriks">
-                    <span data-feather="file-text"></span>
+                    <span data-feather="sliders"></span>
                     Matriks Awal
                 </a>
             </li>

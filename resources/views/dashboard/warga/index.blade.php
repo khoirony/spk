@@ -40,7 +40,7 @@
                 {{ $w->alamat }}
             </td>
             <td>
-              <a href="/editalternatif/{{ $w->id }}" class="btn btn-sm btn-primary"><span data-feather="upload"></span></a> <a href="/editwarga/{{ $w->id }}" class="btn btn-sm btn-warning"><span data-feather="edit"></span></a> <a href="/hapuswarga/{{ $w->id }}" class="btn btn-sm btn-secondary"><span data-feather="trash-2"></span></a>
+              <a href="/editalternatif/{{ $w->id }}" class="btn btn-sm btn-primary"><span data-feather="file-text"></span></a> <a href="/editwarga/{{ $w->id }}" class="btn btn-sm btn-warning"><span data-feather="edit"></span></a> <a href="/hapuswarga/{{ $w->id }}" class="btn btn-sm btn-secondary"><span data-feather="trash-2"></span></a>
             </td>
           </tr>
           @endforeach
